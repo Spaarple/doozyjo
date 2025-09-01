@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<title>Doozyjo - Shape the Future</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<style type="text/tailwindcss">
+        :root {
+            --deep-purple: #2C005C;
+            --vivid-orange: #FF4E00;
+            --intense-blue: #213583;
+            --bright-yellow: #FFBA08;
+        }
+        .shape {
+            transition: transform 0.5s ease-in-out, filter 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+        .floating-bubble {
+            animation: float 6s ease-in-out infinite;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+        }
+        .floating-bubble:hover {
+            transform: scale(1.1) translateY(-10px) !important;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        .faq-item {
+            transition: background-color 0.3s ease;
+        }
+        .faq-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Styles pour les ombres animées des bulles */
+        @keyframes shadow-dance {
+            0%, 100% {
+                transform: scale(1.15, 1.05) translate(-10%, -10%) rotate(-15deg);
+            }
+            50% {
+                transform: scale(1.05, 1.15) translate(10%, 10%) rotate(15deg);
+            }
+        }
+        
+        /* Animation de morphing pour la modale */
+        @keyframes modal-morph {
+            0%, 100% {
+                border-radius: 65% 35% 30% 70% / 60% 40% 60% 40%;
+            }
+            50% {
+                border-radius: 30% 70% 70% 30% / 50% 60% 40% 50%;
+            }
+        }
+        
+        /* Styles pour les bulles avec ombres */
+        .floating-bubble {
+            position: relative;
+        }
+        
+        .floating-bubble::before {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            animation: shadow-dance var(--shadow-duration, 8s) ease-in-out infinite;
+            animation-delay: var(--shadow-delay, 0s);
+        }
+        
+        /* Formes de blobs spécifiques */
+        .blob-1 { border-radius: 61% 39% 51% 49% / 47% 53% 47% 53%; }
+        .blob-2 { border-radius: 38% 62% 44% 56% / 60% 48% 52% 40%; }
+        .blob-3 { border-radius: 62% 38% 68% 32% / 42% 51% 49% 58%; }
+        
+        /* Couleurs d'ombres spécifiques avec délais asynchrones */
+        .floating-bubble:nth-child(1)::before {
+            background: rgba(33, 53, 131, 0.5);
+        }
+        .floating-bubble:nth-child(2)::before {
+            background: rgba(255, 78, 0, 0.5);
+        }
+        .floating-bubble:nth-child(3)::before {
+            background: rgba(44, 0, 92, 0.5);
+        }
+        
+        /* Styles pour la modale */
+        #modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .modal-blob-shape {
+            animation: modal-morph 12s ease-in-out infinite;
+        }
+        
+        #modal-close {
+            width: 44px;
+            height: 44px;
+            border-radius: 9999px;
+            background-color: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        #modal-close:hover {
+            background-color: #e5e7eb;
+            transform: rotate(90deg) scale(1.1);
+        }
+        #modal-close svg {
+           color: #6b7280;
+           transition: color 0.3s ease;
+        }
+        #modal-close:hover svg {
+           color: #1f2937;
+        }
+    </style>
+</head>
+<body class="bg-black text-white" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
+<div class="relative min-h-screen overflow-x-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute top-[5%] left-[5%] h-32 w-32 rounded-full bg-[var(--intense-blue)] opacity-40 blur-3xl shape animate-pulse"></div>
+<div class="absolute bottom-[10%] right-[10%] h-40 w-40 bg-[var(--vivid-orange)] opacity-50 blur-3xl shape" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
+<div class="absolute top-[20%] right-[15%] h-28 w-28 bg-[var(--bright-yellow)] opacity-40 blur-3xl shape"></div>
+<div class="absolute bottom-[5%] left-[15%] h-36 w-36 rounded-lg bg-[var(--deep-purple)] opacity-60 blur-2xl shape animate-pulse-slow"></div>
+<div class="absolute top-[50%] left-[50%] h-24 w-24 translate-x-[-50%] translate-y-[-50%] bg-white opacity-10 blur-2xl shape"></div>
+</div>
+<header class="relative z-20 py-6 px-4 sm:px-8">
+<div class="container mx-auto flex items-center justify-between">
+<div class="flex items-center">
+<img src="DoozyJo v1.3.png" alt="Doozyjo" class="h-20 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+<h1 class="text-3xl font-bold tracking-tight" style="display: none;">Doozyjo</h1>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-white/80 hover:text-white transition" href="#features">Fonctionnalités</a>
+<a class="text-white/80 hover:text-white transition" href="#cta">Rejoindre la liste d'attente</a>
+<a class="text-white/80 hover:text-white transition" href="#faq">FAQ</a>
+</nav>
+<button class="md:hidden text-white">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</header>
+<main class="relative z-10">
+<section class="py-20 md:py-32 text-center">
+<div class="container mx-auto px-4">
+<h2 class="text-5xl md:text-7xl font-bold tracking-tight">Shape the Future with <span id="changing-word" class="text-[var(--vivid-orange)]">Innovation</span><span id="cursor" class="text-[var(--vivid-orange)] animate-pulse">|</span></h2>
+<p class="mt-4 text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
+                        Be the first to know when Doozyjo launches. Join our community of innovators and get exclusive early access.
+                    </p>
+<a class="mt-8 inline-block cursor-pointer rounded-lg bg-[var(--vivid-orange)] px-8 py-4 text-lg font-bold text-white transition-transform hover:scale-105 hover:bg-[var(--bright-yellow)] hover:text-[var(--deep-purple)]" href="#cta">
+                        Join the Waitlist
+                    </a>
+</div>
+</section>
+<section class="py-20" id="features">
+<div class="container mx-auto px-4">
+<h3 class="text-4xl font-bold text-center mb-20">Why You'll Love Doozyjo</h3>
+<div class="flex flex-wrap justify-center items-center gap-12 md:gap-8 lg:gap-16" style="transform: perspective(1500px) rotateX(10deg);">
+<div class="floating-bubble blob-1 w-72 h-72 flex flex-col items-center justify-center p-8 text-center cursor-pointer" style="background: radial-gradient(circle at 70% 30%, var(--intense-blue), var(--deep-purple)); animation-delay: 0s; --shadow-delay: 0s; --shadow-duration: 7s;" data-title="Pioneering Tech" data-text="Experience the next generation of crowdfunding with cutting-edge technology that revolutionizes how creators and backers connect. Our platform uses advanced algorithms and modern design to ensure the best possible experience.">
+<div class="text-5xl mb-4" style="filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));">🚀</div>
+<h4 class="text-2xl font-bold mb-2">Pioneering Tech</h4>
+<p class="text-white/80 text-sm">Experience the next generation of crowdfunding.</p>
+</div>
+<div class="floating-bubble blob-2 w-80 h-80 flex flex-col items-center justify-center p-8 text-center cursor-pointer" style="background: radial-gradient(circle at 30% 70%, var(--vivid-orange), var(--bright-yellow)); animation-delay: -2s; --shadow-delay: -2.5s; --shadow-duration: 10s;" data-title="Fuel Innovation" data-text="Support groundbreaking projects and visionary creators who are pushing the boundaries of what's possible. Join a community that believes in the power of innovation to change the world for the better.">
+<div class="text-5xl mb-4" style="filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));">💡</div>
+<h4 class="text-2xl font-bold mb-2">Fuel Innovation</h4>
+<p class="text-white/80 text-sm">Support groundbreaking projects and visionary creators.</p>
+</div>
+<div class="floating-bubble blob-3 w-72 h-72 flex flex-col items-center justify-center p-8 text-center cursor-pointer" style="background: radial-gradient(circle at 50% 50%, var(--deep-purple), #4a0099); animation-delay: -4s; --shadow-delay: -5s; --shadow-duration: 12s;" data-title="Community First" data-text="Join a vibrant community dedicated to bringing ideas to life. Connect with like-minded individuals, share feedback, and be part of something bigger than yourself. Together, we create the future.">
+<div class="text-5xl mb-4" style="filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));">🤝</div>
+<h4 class="text-2xl font-bold mb-2">Community First</h4>
+<p class="text-white/80 text-sm">Join a vibrant community dedicated to bringing ideas to life.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-20" id="cta">
+<div class="container mx-auto px-4 flex justify-center">
+<div class="w-full max-w-lg rounded-2xl bg-black/30 backdrop-blur-md border border-white/10 p-8 md:p-12" style="transform: perspective(1000px) rotateX(2deg) rotateY(-2deg); box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 78, 0, 0.3);">
+<h3 class="text-3xl font-bold text-center mb-2">Get Early Access</h3>
+<p class="text-center text-white/70 mb-8">Sign up now and be the first to know when we launch.</p>
+<form class="flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-white/80" for="name">Name</label>
+<input class="form-input w-full rounded-lg border-white/20 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 focus:border-[var(--vivid-orange)] focus:ring-[var(--vivid-orange)]" id="name" name="name" placeholder="Your Name" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-white/80" for="email">Email</label>
+<input class="form-input w-full rounded-lg border-white/20 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 focus:border-[var(--vivid-orange)] focus:ring-[var(--vivid-orange)]" id="email" name="email" placeholder="you@example.com" type="email"/>
+</div>
+<button class="w-full cursor-pointer rounded-lg bg-[var(--vivid-orange)] py-3 text-lg font-bold text-white transition-transform hover:scale-105 hover:bg-[var(--bright-yellow)] hover:text-[var(--deep-purple)]">
+                                Get Notified
+                            </button>
+</form>
+</div>
+</div>
+</section>
+<section class="py-20" id="faq">
+<div class="container mx-auto px-4 max-w-3xl">
+<h3 class="text-4xl font-bold text-center mb-12">Frequently Asked Questions</h3>
+<div class="space-y-4">
+<details class="faq-item rounded-lg border border-white/10 p-6 cursor-pointer">
+<summary class="text-lg font-semibold flex justify-between items-center">
+                                What is Doozyjo?
+                                <span class="transform transition-transform duration-300 group-open:rotate-45">+</span>
+</summary>
+<p class="mt-4 text-white/70">Doozyjo is a next-generation crowdfunding platform designed to connect innovative creators with a passionate community of backers. We focus on technology, design, and art projects that push the boundaries of what's possible.</p>
+</details>
+<details class="faq-item rounded-lg border border-white/10 p-6 cursor-pointer">
+<summary class="text-lg font-semibold flex justify-between items-center">
+                                How is it different from other platforms?
+                                <span class="transform transition-transform duration-300 group-open:rotate-45">+</span>
+</summary>
+<p class="mt-4 text-white/70">We differentiate ourselves through a curated selection of high-quality projects, a more engaging and interactive community experience, and transparent fees. Our goal is to foster long-term relationships between creators and backers.</p>
+</details>
+<details class="faq-item rounded-lg border border-white/10 p-6 cursor-pointer">
+<summary class="text-lg font-semibold flex justify-between items-center">
+                                When is the official launch?
+                                <span class="transform transition-transform duration-300 group-open:rotate-45">+</span>
+</summary>
+<p class="mt-4 text-white/70">We are targeting a launch in Q4 2024. By signing up for our waitlist, you'll be the first to receive updates, exclusive sneak peeks, and an invitation to our early access program.</p>
+</details>
+<details class="faq-item rounded-lg border border-white/10 p-6 cursor-pointer">
+<summary class="text-lg font-semibold flex justify-between items-center">
+                                Is it free to sign up?
+                                <span class="transform transition-transform duration-300 group-open:rotate-45">+</span>
+</summary>
+<p class="mt-4 text-white/70">Yes, absolutely! Signing up for the waitlist is completely free and comes with no obligations. It simply ensures you get notified and have the opportunity for early access.</p>
+</details>
+</div>
+</div>
+</section>
+</main>
+
+<!-- Modale -->
+<div id="modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300 z-50">
+    <div id="modal-content" class="bg-white shadow-2xl p-16 lg:p-20 relative max-w-[90vw] lg:max-w-2xl min-w-[300px]">
+        <button id="modal-close" class="absolute top-8 right-8 z-10">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <h2 id="modal-title" class="text-3xl font-bold mb-4 text-gray-800">Titre de la modale</h2>
+        <p id="modal-text" class="text-gray-600 leading-relaxed">Description détaillée du service ou de l'information.</p>
+    </div>
+</div>
+
+<footer class="relative z-10 py-8 border-t border-white/10 mt-20">
+<div class="container mx-auto px-4 text-center text-white/60">
+<p>© 2025 Doozyjo. All rights reserved.</p>
+</div>
+</footer>
+</div>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation typewriter pour le mot qui change
+            const changingWord = document.getElementById('changing-word');
+            const words = ['Innovation', 'Passion', 'Excellence'];
+            let currentIndex = 0;
+            let isTyping = false;
+
+            function typeWriter(text, element, callback) {
+                let i = 0;
+                element.textContent = '';
+                
+                function type() {
+                    if (i < text.length) {
+                        element.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(type, 100); // Vitesse de frappe
+                    } else {
+                        setTimeout(callback, 2000); // Attendre 2 secondes avant d'effacer
+                    }
+                }
+                type();
+            }
+
+            function deleteText(element, callback) {
+                let text = element.textContent;
+                let i = text.length;
+                
+                function erase() {
+                    if (i > 0) {
+                        element.textContent = text.substring(0, i - 1);
+                        i--;
+                        setTimeout(erase, 80); // Vitesse d'effacement
+                    } else {
+                        setTimeout(callback, 500); // Pause avant le prochain mot
+                    }
+                }
+                erase();
+            }
+
+            function cycleWords() {
+                if (isTyping) return;
+                isTyping = true;
+                
+                deleteText(changingWord, () => {
+                    currentIndex = (currentIndex + 1) % words.length;
+                    typeWriter(words[currentIndex], changingWord, () => {
+                        isTyping = false;
+                        setTimeout(cycleWords, 2000); // Attendre 2 secondes avant le prochain cycle
+                    });
+                });
+            }
+
+            // Démarrer l'animation après 3 secondes
+            setTimeout(() => {
+                cycleWords();
+            }, 3000);
+
+            // Script pour les FAQ
+            document.querySelectorAll('details').forEach((detail) => {
+                detail.addEventListener('toggle', () => {
+                    const summary = detail.querySelector('summary');
+                    const icon = summary.querySelector('span');
+                    if (detail.open) {
+                        icon.style.transform = 'rotate(45deg)';
+                    } else {
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+
+            // Variables pour la modale
+            const allBubbles = document.querySelectorAll('.floating-bubble');
+            const modal = document.getElementById('modal');
+            const modalContent = document.getElementById('modal-content');
+            const modalClose = document.getElementById('modal-close');
+            const modalTitle = document.getElementById('modal-title');
+            const modalText = document.getElementById('modal-text');
+
+            // Animations GSAP de fond pour les bulles
+            allBubbles.forEach(bubble => {
+                const randomDuration = gsap.utils.random(20, 35);
+                gsap.to(bubble, { 
+                    y: "random(-15, 15)", 
+                    x: "random(-10, 10)", 
+                    duration: "random(3, 6)", 
+                    repeat: -1, 
+                    yoyo: true, 
+                    ease: "sine.inOut", 
+                    delay: "random(0, 2)" 
+                });
+            });
+
+            // Fonction d'explosion
+            function createExplosion(x, y, color) {
+                const container = document.body;
+                const [r, g, b] = color.match(/\d+/g).map(Number);
+
+                // Flash
+                const flash = document.createElement('div');
+                flash.style.position = 'fixed';
+                flash.style.inset = '0';
+                flash.style.backgroundColor = 'white';
+                flash.style.zIndex = '200';
+                flash.style.pointerEvents = 'none';
+                container.appendChild(flash);
+                gsap.to(flash, { opacity: 0, duration: 0.4, ease: "power1.out", onComplete: () => flash.remove() });
+
+                // Onde de choc
+                const shockwave = document.createElement('div');
+                shockwave.style.position = 'fixed';
+                shockwave.style.left = `${x}px`;
+                shockwave.style.top = `${y}px`;
+                shockwave.style.borderRadius = '50%';
+                shockwave.style.border = `4px solid rgba(${r + 50}, ${g + 50}, ${b + 50}, 0.8)`;
+                shockwave.style.zIndex = '150';
+                shockwave.style.transform = 'translate(-50%, -50%)';
+                shockwave.style.pointerEvents = 'none';
+                container.appendChild(shockwave);
+                gsap.fromTo(shockwave, 
+                    { width: 0, height: 0, opacity: 1 }, 
+                    { width: 500, height: 500, opacity: 0, duration: 0.6, ease: "expo.out", onComplete: () => shockwave.remove() }
+                );
+
+                // Particules
+                const particleCount = 100;
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.style.position = 'fixed';
+                    particle.style.top = '0';
+                    particle.style.left = '0';
+                    particle.style.pointerEvents = 'none';
+                    particle.style.zIndex = '100';
+                    const size = gsap.utils.random(5, 30);
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.background = `radial-gradient(circle, rgba(255,255,255,0.9) 0%, ${color} 80%)`;
+                    particle.style.borderRadius = '50%';
+                    container.appendChild(particle);
+
+                    const angle = Math.random() * Math.PI * 2;
+                    const radius = gsap.utils.random(100, window.innerWidth / 2);
+                    const endX = x + radius * Math.cos(angle);
+                    const endY = y + radius * Math.sin(angle);
+                    
+                    gsap.set(particle, { x: x - size/2, y: y - size/2, opacity: 1 });
+                    gsap.to(particle, {
+                        x: endX, y: endY, opacity: 0, scale: 0,
+                        duration: gsap.utils.random(1.5, 2.5),
+                        ease: "expo.out",
+                        onComplete: () => particle.remove()
+                    });
+                }
+            }
+
+            // Logique d'ouverture de la modale
+            allBubbles.forEach(bubble => {
+                bubble.addEventListener('click', (e) => {
+                    if (document.body.classList.contains('modal-open')) return;
+                    document.body.classList.add('modal-open');
+
+                    const style = getComputedStyle(bubble);
+                    const color = style.backgroundColor;
+                    
+                    gsap.timeline()
+                        .to(bubble, { scale: 0.9, duration: 0.1, ease: "power1.in" })
+                        .to(bubble, {
+                            scale: 1, duration: 0.5, ease: "elastic.out(1, 0.6)",
+                            onStart: () => createExplosion(e.clientX, e.clientY, color)
+                        });
+
+                    setTimeout(() => {
+                        modalTitle.textContent = bubble.dataset.title;
+                        modalText.textContent = bubble.dataset.text;
+                        modal.classList.add('active');
+                        modalContent.classList.add('modal-blob-shape');
+
+                        gsap.fromTo(modalContent, 
+                            { scale: 0.5, y: 100, rotation: -15, opacity: 0 }, 
+                            { scale: 1, y: 0, rotation: 0, opacity: 1, duration: 0.6, ease: "elastic.out(1, 0.7)" }
+                        );
+                    }, 250);
+                });
+            });
+
+            // Logique de fermeture de la modale
+            function closeModal() {
+                gsap.to(modalContent, {
+                    scale: 0.5, y: 100, opacity: 0, rotation: 15,
+                    duration: 0.3, ease: "power2.in",
+                    onComplete: () => {
+                        modal.classList.remove('active');
+                        modalContent.classList.remove('modal-blob-shape');
+                        document.body.classList.remove('modal-open');
+                    }
+                });
+            }
+
+            modalClose.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+        });
+    </script>
+
+</body></html>

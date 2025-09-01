@@ -129,6 +129,119 @@
         #modal-close:hover svg {
            color: #1f2937;
         }
+        
+        /* Styles pour le mode clair */
+        .light-mode {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #1f2937;
+        }
+        
+        .light-mode .bg-black {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+        }
+        
+        .light-mode .text-white {
+            color: #1f2937 !important;
+        }
+        
+        .light-mode .text-white\/80 {
+            color: rgba(31, 41, 55, 0.8) !important;
+        }
+        
+        .light-mode .text-white\/70 {
+            color: rgba(31, 41, 55, 0.7) !important;
+        }
+        
+        .light-mode .text-white\/60 {
+            color: rgba(31, 41, 55, 0.6) !important;
+        }
+        
+        .light-mode .border-white\/10 {
+            border-color: rgba(31, 41, 55, 0.1) !important;
+        }
+        
+        .light-mode .bg-white\/5 {
+            background-color: rgba(255, 255, 255, 0.8) !important;
+        }
+        
+        .light-mode .bg-black\/30 {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+        }
+        
+        .light-mode .placeholder\:text-white\/40::placeholder {
+            color: rgba(31, 41, 55, 0.4) !important;
+        }
+        
+        /* Toggle switch styles */
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .light-mode .theme-toggle {
+            background: rgba(31, 41, 55, 0.2);
+            border-color: rgba(31, 41, 55, 0.3);
+        }
+        
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .light-mode .theme-toggle::before {
+            transform: translateX(28px);
+            background: #1f2937;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Adaptations pour le mode clair - formes d'arrière-plan */
+        .light-mode .shape {
+            opacity: 0.2 !important;
+        }
+        
+        /* Adaptations pour le mode clair - bulles/blobs */
+        .light-mode .floating-bubble {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .light-mode .floating-bubble::before {
+            opacity: 0.3;
+        }
+        
+        /* Adaptations pour le mode clair - modale */
+        .light-mode #modal {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .light-mode #modal-content {
+            background: white;
+            color: #1f2937;
+        }
+        
+        .light-mode #modal-title {
+            color: #1f2937;
+        }
+        
+        .light-mode #modal-text {
+            color: #6b7280;
+        }
     </style>
 </head>
 <body class="bg-black text-white" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
@@ -150,6 +263,7 @@
 <a class="text-white/80 hover:text-white transition" href="#features">Fonctionnalités</a>
 <a class="text-white/80 hover:text-white transition" href="#cta">Rejoindre la liste d'attente</a>
 <a class="text-white/80 hover:text-white transition" href="#faq">FAQ</a>
+<div class="theme-toggle ml-4" id="theme-toggle" title="Basculer entre mode clair et sombre"></div>
 </nav>
 <button class="md:hidden text-white">
 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -272,6 +386,31 @@
 </div>
 <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Gestion du thème clair/sombre
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            
+            // Vérifier le thème sauvegardé ou utiliser le thème sombre par défaut
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                body.classList.add('light-mode');
+            }
+            
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('light-mode');
+                const isLight = body.classList.contains('light-mode');
+                localStorage.setItem('theme', isLight ? 'light' : 'dark');
+                
+                // Animation du toggle
+                gsap.to(themeToggle, {
+                    scale: 0.9,
+                    duration: 0.1,
+                    yoyo: true,
+                    repeat: 1,
+                    ease: "power2.inOut"
+                });
+            });
+
             // Animation typewriter pour le mot qui change
             const changingWord = document.getElementById('changing-word');
             const words = ['Innovation', 'Passion', 'Excellence'];

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import WaitlistForm from './components/WaitlistForm';
 
 const HomePage: React.FC = () => {
   const hasInitRef = useRef(false);
@@ -293,17 +294,7 @@ const HomePage: React.FC = () => {
                 Les offres spéciales early-bird,
                 La possibilité de devenir bêta-testeur.
               </p>
-              <form className="flex flex-col gap-6">
-                <div className="flex flex-col gap-2">
-                  <label className="text-white/80" htmlFor="name">Nom</label>
-                  <input className="form-input w-full rounded-lg border-white/20 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 focus:border-[var(--vivid-orange)] focus:ring-[var(--vivid-orange)]" id="name" name="name" placeholder="Your Name" type="text" />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label className="text-white/80" htmlFor="email">Email</label>
-                  <input className="form-input w-full rounded-lg border-white/20 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 focus:border-[var(--vivid-orange)] focus:ring-[var(--vivid-orange)]" id="email" name="email" placeholder="you@example.com" type="email" />
-                </div>
-                <button className="w-full cursor-pointer rounded-lg bg-[var(--vivid-orange)] py-3 text-lg font-bold text-white transition-transform hover:scale-105 hover:bg-[var(--bright-yellow)] hover:text-[var(--deep-purple)]" type="button">Je m’inscris maintenant</button>
-              </form>
+              <WaitlistForm />
             </div>
           </div>
         </section>

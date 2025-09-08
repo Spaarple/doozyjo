@@ -40,6 +40,17 @@ const HomePage: React.FC = () => {
       });
     });
 
+    // Rendre toute la carte d'accordéon cliquable (au-delà du <summary>)
+    document.querySelectorAll('details.faq-item').forEach((detail) => {
+      detail.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        // Évite la double bascule quand on clique sur <summary> ou éléments interactifs
+        if (target.closest('summary, a, button, input, textarea, select, label')) return;
+        const el = detail as HTMLDetailsElement;
+        el.open = !el.open;
+      });
+    });
+
     // @ts-ignore
     if (window.gsap) {
       const gsap = (window as any).gsap;

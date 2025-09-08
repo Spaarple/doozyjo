@@ -141,7 +141,7 @@
 /* Styles pour le mode clair */
 .light-mode {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    color: #1f2937;
+    color: #000000;
 }
 
 .light-mode .bg-black {
@@ -149,19 +149,19 @@
 }
 
 .light-mode .text-white {
-    color: #1f2937 !important;
+    color: #000000 !important;
 }
 
 .light-mode .text-white\/80 {
-    color: rgba(31, 41, 55, 0.8) !important;
+    color: rgba(0, 0, 0, 0.8) !important;
 }
 
 .light-mode .text-white\/70 {
-    color: rgba(31, 41, 55, 0.7) !important;
+    color: rgba(0, 0, 0, 0.7) !important;
 }
 
 .light-mode .text-white\/60 {
-    color: rgba(31, 41, 55, 0.6) !important;
+    color: rgba(0, 0, 0, 0.6) !important;
 }
 
 .light-mode .border-white\/10 {
@@ -201,4 +201,83 @@
 
 .light-mode .floating-bubble::before {
     opacity: 0.3;
+}
+
+/* Forcer le texte en blanc en mode sombre (par défaut) */
+body:not(.light-mode) {
+    color: #ffffff;
+}
+
+body:not(.light-mode) .text-black,
+body:not(.light-mode) .text-slate-800,
+body:not(.light-mode) .text-gray-800,
+body:not(.light-mode) .text-gray-900,
+body:not(.light-mode) .text-gray-700,
+body:not(.light-mode) .text-gray-600,
+body:not(.light-mode) .text-dark {
+    color: #ffffff !important;
+}
+
+/* Couleurs explicites pour .text-dark selon le thème */
+.light-mode .text-dark {
+    color: #000000 !important;
+}
+
+/* Harmoniser les teintes grises en fonction du thème */
+.light-mode .text-slate-800,
+.light-mode .text-gray-900,
+.light-mode .text-gray-800,
+.light-mode .text-gray-700,
+.light-mode .text-gray-600 {
+    color: #000000 !important;
+}
+
+/* FAQ: forcer les couleurs selon le thème */
+#faq summary,
+#faq p {
+    transition: color 0.2s ease;
+}
+
+body:not(.light-mode) #faq summary,
+body:not(.light-mode) #faq p {
+    color: #ffffff !important;
+}
+
+.light-mode #faq summary,
+.light-mode #faq p {
+    color: #000000 !important;
+}
+
+/* Formulaire (#cta): textes, labels et champs selon le thème */
+#cta, #cta * {
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+body:not(.light-mode) #cta h3,
+body:not(.light-mode) #cta p,
+body:not(.light-mode) #cta label {
+    color: #ffffff !important;
+}
+
+.light-mode #cta h3,
+.light-mode #cta p,
+.light-mode #cta label {
+    color: #000000 !important;
+}
+
+/* Champs du formulaire */
+body:not(.light-mode) #cta input::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.light-mode #cta input,
+.light-mode #cta textarea,
+.light-mode #cta select {
+    color: #000000 !important;
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border-color: rgba(31, 41, 55, 0.2) !important;
+}
+
+.light-mode #cta input::placeholder {
+    color: rgba(0, 0, 0, 0.4) !important;
 }

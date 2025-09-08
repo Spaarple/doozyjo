@@ -138,6 +138,39 @@
     color: #1f2937;
 }
 
+/* Modale: le contenu doit rester en noir quel que soit le thème */
+#modal-content {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+#modal-content h1,
+#modal-content h2,
+#modal-content h3,
+#modal-content h4,
+#modal-content h5,
+#modal-content h6,
+#modal-content p,
+#modal-content span,
+#modal-content a,
+#modal-content label,
+#modal-content button,
+#modal-content div {
+    color: #000000 !important;
+}
+
+/* Neutraliser les utilitaires tailwind de texte blanc à l'intérieur de la modale */
+body:not(.light-mode) #modal-content .text-white,
+body:not(.light-mode) #modal-content .text-white\/80,
+body:not(.light-mode) #modal-content .text-white\/70,
+body:not(.light-mode) #modal-content .text-white\/60,
+.light-mode #modal-content .text-white,
+.light-mode #modal-content .text-white\/80,
+.light-mode #modal-content .text-white\/70,
+.light-mode #modal-content .text-white\/60 {
+    color: #000000 !important;
+}
+
 /* Styles pour le mode clair */
 .light-mode {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);

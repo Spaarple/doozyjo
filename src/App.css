@@ -110,7 +110,7 @@
 }
 
 .modal-blob-shape {
-  animation: modal-morph 12s ease-in-out infinite;
+  animation: modal-morph 10s ease-in-out infinite;
 }
 
 #modal-close {
@@ -141,6 +141,7 @@
 /* Modale: le contenu doit rester en noir quel que soit le thème */
 #modal-content {
   background-color: #ffffff !important;
+  padding: 6em;
   color: #000000 !important;
 }
 

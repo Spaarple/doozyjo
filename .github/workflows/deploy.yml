@@ -2,7 +2,7 @@ name: Deploy Vite to GitHub Pages
 
 on:
   push:
-    branches: [ main ]   # adapte si besoin
+    branches: [ viteJS-app ]   # adapte si besoin
 
 permissions:
   contents: read

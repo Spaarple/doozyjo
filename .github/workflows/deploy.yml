@@ -2,7 +2,8 @@ name: Deploy Vite to GitHub Pages
 
 on:
   push:
-    branches: [ viteJS-app ]   # adapte si besoin
+    branches:
+      - viteJS-app            # ⬅ change en 'viteJS-app' si c’est ta branche par défaut
 
 permissions:
   contents: read
@@ -21,7 +22,8 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
+          cache: npm
 
       - name: Install
         run: npm ci
@@ -32,8 +34,15 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist  # dossier de sortie Vite
+          path: dist    # dossier généré par Vite
 
   deploy:
     needs: build
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

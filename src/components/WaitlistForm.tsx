@@ -7,7 +7,6 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const WaitlistForm: React.FC = () => {
   const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName]   = useState('')
   const [email, setEmail]         = useState('')
   const [status, setStatus]       = useState<SubmissionState>('idle')
   const [message, setMessage]     = useState('')
@@ -20,9 +19,7 @@ const WaitlistForm: React.FC = () => {
     if (!firstName.trim() || firstName.trim().length < 2) {
       setStatus('error'); setMessage('Veuillez saisir un prénom valide (min. 2 caractères).'); return
     }
-    if (!lastName.trim() || lastName.trim().length < 2) {
-      setStatus('error'); setMessage('Veuillez saisir un nom valide (min. 2 caractères).'); return
-    }
+  
     if (!emailRegex.test(email.trim())) {
       setStatus('error'); setMessage("Veuillez saisir une adresse e-mail valide."); return
     }
@@ -33,7 +30,6 @@ const WaitlistForm: React.FC = () => {
         .from('preorders') // ou 'waitlist' si tu as choisi cette table
         .insert([{
           first_name: firstName.trim(),
-          last_name:  lastName.trim(),
           email:      email.trim(),
         }])
 
@@ -70,22 +66,6 @@ const WaitlistForm: React.FC = () => {
           onChange={(e) => setFirstName(e.target.value)}
           disabled={status === 'loading'}
           autoComplete="given-name"
-          required
-        />
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <label className="text-white/80" htmlFor="lastName">Nom</label>
-        <input
-          id="lastName"
-          name="lastName"
-          placeholder="Votre nom"
-          className="form-input w-full rounded-lg border-white/20 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 focus:border-[var(--vivid-orange)] focus:ring-[var(--vivid-orange)]"
-          type="text"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          disabled={status === 'loading'}
-          autoComplete="family-name"
           required
         />
       </div>

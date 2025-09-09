@@ -26,6 +26,15 @@ const ThankYou: React.FC = () => {
       <Header />
 
       <main className="min-h-[70vh] bg-black text-white">
+
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute top-[5%] left-[5%] h-32 w-32 rounded-full bg-[var(--intense-blue)] opacity-40 blur-3xl shape animate-pulse"></div>
+          <div className="absolute bottom-[10%] right-[10%] h-40 w-40 bg-[var(--vivid-orange)] opacity-50 blur-3xl shape" style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}></div>
+          <div className="absolute top-[20%] right-[15%] h-28 w-28 bg-[var(--bright-yellow)] opacity-40 blur-3xl shape"></div>
+          <div className="absolute bottom-[5%] left-[15%] h-36 w-36 rounded-lg bg-[var(--deep-purple)] opacity-60 blur-2xl shape animate-pulse-slow"></div>
+          <div className="absolute top-[50%] left-[50%] h-24 w-24 translate-x-[-50%] translate-y-[-50%] bg-white opacity-10 blur-2xl shape"></div>
+      </div>
+
         <section className="container mx-auto px-4 py-16">
           <div className="mx-auto max-w-2xl text-center">
             <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-green-500/20 text-gray-50">
@@ -36,16 +45,14 @@ const ThankYou: React.FC = () => {
             </div>
 
             <h1 className="text-3xl md:text-4xl font-extrabold">Merci pour votre inscription 🎉</h1>
-            <p className="mt-4 text-white/80">
-              Votre inscription a bien été prise en compte. Vous recevrez un e-mail dès que notre campagne
-              de <span className="font-semibold">crowdfunding</span> sera lancée.
-            </p>
 
             <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-6 text-left">
-              <h2 className="text-xl font-semibold">Besoin d’aide ?</h2>
-              <p className="mt-2 text-white/80">
-                Contactez-nous à&nbsp;
-                <a className="underline" href="mailto:contact@doozyjo.com">contact@doozyjo.com</a>.
+              <p className="mt-4 text-white/80 text-lg">
+                Votre inscription a bien été prise en compte. Vous recevrez un e-mail dès que notre campagne
+                de <span className="font-semibold">crowdfunding</span> sera lancée.
+              </p>
+              <p className="mt-6 text-md">
+               Pensez à ajoutez <a className="underline" href="mailto:contact@doozyjo.fr">contact@doozyjo.fr</a> à vos contacts pour ne rien manquer.
               </p>
 
               <div className="mt-4">
@@ -77,10 +84,6 @@ const ThankYou: React.FC = () => {
                 Retour à l’accueil
               </Link>
             </div>
-
-            <p className="mt-6 text-sm">
-              Astuce : ajoutez <a className="underline" href="mailto:contact@doozyjo.com">contact@doozyjo.com</a> à vos contacts pour ne rien manquer.
-            </p>
           </div>
         </section>
       </main>

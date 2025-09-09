@@ -52,7 +52,8 @@ const ThankYou: React.FC = () => {
                 de <span className="font-semibold">crowdfunding</span> sera lancée.
               </p>
               <p className="mt-6 text-md">
-               Pensez à ajoutez <a className="underline" href="mailto:contact@doozyjo.fr">contact@doozyjo.fr</a> à vos contacts pour ne rien manquer.
+                Pensez à ajouter <a className="underline" href="mailto:contact@doozyjo.fr">contact@doozyjo.fr</a>&nbsp;
+                à vos contacts pour éviter que nos messages n'arrivent dans vos spams ou votre courrier indésirable.
               </p>
 
               <div className="mt-4">

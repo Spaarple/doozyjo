@@ -53,7 +53,7 @@ const WaitlistForm: React.FC = () => {
   }
 
   return (
-    <form className="flex flex-col gap-6" onSubmit={handleSubmit} noValidate>
+    <form id="form-preorders" className="flex flex-col gap-6" onSubmit={handleSubmit} noValidate>
       <div className="flex flex-col gap-2">
         <label className="text-white/80" htmlFor="firstName">Prénom</label>
         <input

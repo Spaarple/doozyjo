@@ -92,7 +92,7 @@ const WaitlistForm: React.FC = () => {
         </div>
       )}
 
-      <button
+      <button id="submit-form-preorders"
         className="w-full cursor-pointer rounded-lg bg-[var(--vivid-orange)] py-3 text-lg font-bold text-white transition-transform hover:scale-105 hover:bg-[var(--bright-yellow)] hover:text-[var(--deep-purple)] disabled:opacity-60 disabled:cursor-not-allowed"
         type="submit"
         disabled={status === 'loading'}

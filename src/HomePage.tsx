@@ -18,17 +18,19 @@ const HomePage: React.FC = () => {
       body.classList.add('light-mode');
     }
 
-    const themeToggle = document.getElementById('theme-toggle');
+    //const themeToggle = document.getElementById('theme-toggle');
+    const themeToggle = document.querySelectorAll('.theme-toggle');
     if (themeToggle) {
-      themeToggle.addEventListener('click', () => {
-        body.classList.toggle('light-mode');
-        const isLight = body.classList.contains('light-mode');
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
-        // @ts-ignore
-        if (window.gsap) {
-          // @ts-ignore
-          window.gsap.to(themeToggle, { scale: 0.9, duration: 0.1, yoyo: true, repeat: 1, ease: 'power2.inOut' });
-        }
+      themeToggle.forEach((toggle) => {
+        toggle.addEventListener('click', () => {
+          if (body.classList.contains('light-mode')) {
+            body.classList.remove('light-mode');
+            localStorage.setItem('theme', 'dark');
+          } else {
+            body.classList.add('light-mode');
+            localStorage.setItem('theme', 'light');
+          }
+        });
       });
     }
 

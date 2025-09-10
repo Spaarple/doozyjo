@@ -255,7 +255,7 @@ const HomePage: React.FC = () => {
             </h2>
             <p className="mt-4 text-lg md:text-xl text-slate-800 max-w-2xl mx-auto">
               Ne perdez plus jamais vos idées. DoozyJo, le bracelet intelligent qui capture et organise
-              automatiquement toutes vos pensées en un simple clic - votre cerveau de poche toujours disponible.
+              automatiquement toutes vos pensées en un simple clic, votre cerveau de poche toujours disponible.
             </p>
             <a className="mt-8 inline-block cursor-pointer rounded-lg bg-[var(--vivid-orange)] px-8 py-4 text-lg font-bold text-black dark:text-white transition-transform hover:scale-105 hover:bg-[var(--bright-yellow)] hover:text-[var(--deep-purple)]" href="#cta">
               Je rejoins la liste d’attente

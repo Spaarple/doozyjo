@@ -41,28 +41,28 @@ const LegalNoticePage: React.FC = () => {
       <div className="container mx-auto max-w-3xl space-y-8">
         <header>
           <h1 className="text-4xl font-bold mb-2">Mentions légales & Politique de confidentialité (RGPD)</h1>
-          <p className="text-white/70">Dernière mise à jour : 08/09/2025</p>
+          <p className="text-white/70">Dernière mise à jour : 10/09/2025</p>
         </header>
 
         <section className="space-y-2">
           <h2 className="text-2xl font-semibold">Éditeur du site</h2>
-          <p><span className="text-white/70">Raison sociale</span> : DoozyJo (SAS) – Capital social: [à compléter]</p>
-          <p><span className="text-white/70">Siège social</span> : [Adresse complète]</p>
-          <p><span className="text-white/70">RCS / SIREN</span> : [Numéro]</p>
-          <p><span className="text-white/70">Directeur de la publication</span> : [Nom, fonction]</p>
-          <p><span className="text-white/70">Contact</span> : <a href="mailto:contact@doozyjo.com" className="underline">contact@doozyjo.com</a></p>
+          <p><span className="text-white/70">Raison sociale</span> : DoozyJo (SAS)</p>
+          <p><span className="text-white/70">Siège social</span> : 41 RUE PASTEUR, 76530 GRAND-COURONNE</p>
+          <p><span className="text-white/70">RCS / SIREN</span> : 928 227 917 R.C.S. Rouen / 928227917</p>
+          <p><span className="text-white/70">Directeur de la publication</span> : Antoine FOURCIN, Dirigeant</p>
+          <p><span className="text-white/70">Contact</span> : <a href="mailto:contact@doozyjo.fr" className="underline">contact@doozyjo.fr</a></p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-2xl font-semibold">Hébergeur</h2>
-          <p><span className="text-white/70">Hébergeur</span> : [Nom de l’hébergeur]</p>
-          <p><span className="text-white/70">Adresse</span> : [Adresse complète]</p>
-          <p><span className="text-white/70">Téléphone</span> : [Numéro]</p>
+          <p><span className="text-white/70">Hébergeur</span> : LWS (Ligne Web Services)</p>
+          <p><span className="text-white/70">Adresse</span> : 10, RUE PENTHIEVRE, 75008 PARIS, FRANCE</p>
+          <p>Téléphone : <a href="tel:+331 77 62 30 03" className="underline">01 77 62 30 03</a></p>
         </section>
 
         <section className="space-y-2">
           <h2 className="text-2xl font-semibold">Délégué à la protection des données (DPO)</h2>
-          <p>Contact DPO : <a href="mailto:dpo@doozyjo.com" className="underline">dpo@doozyjo.com</a></p>
+          <p>Contact DPO : <a href="mailto:contact@doozyjo.fr" className="underline">contact@doozyjo.fr</a></p>
         </section>
 
         <section className="space-y-2">
@@ -111,7 +111,7 @@ const LegalNoticePage: React.FC = () => {
             <li>Droit de retirer votre consentement à tout moment</li>
             <li>Directive sur le sort des données après décès</li>
           </ul>
-          <p>Exercer vos droits: <a href="mailto:dpo@doozyjo.com" className="underline">dpo@doozyjo.com</a>. Joindre un justificatif d’identité si nécessaire.</p>
+          <p>Exercer vos droits: <a href="mailto:contact@doozyjo.fr" className="underline">contact@doozyjo.fr</a>. Joindre un justificatif d’identité si nécessaire.</p>
           <p>Réclamation possible auprès de la CNIL: <a className="underline" href="https://www.cnil.fr">https://www.cnil.fr</a>.</p>
         </section>
 
@@ -132,7 +132,7 @@ const LegalNoticePage: React.FC = () => {
 
         <section className="space-y-2">
           <h2 className="text-2xl font-semibold">Contact</h2>
-          <p>Contact général: <a href="mailto:contact@doozyjo.com" className="underline">contact@doozyjo.com</a> – DPO: <a href="mailto:dpo@doozyjo.com" className="underline">dpo@doozyjo.com</a></p>
+          <p>Contact général: <a href="mailto:contact@doozyjo.fr" className="underline">contact@doozyjo.fr</a></p>
         </section>
       </div>
       </main>
